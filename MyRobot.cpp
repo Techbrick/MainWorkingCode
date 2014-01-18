@@ -1,4 +1,5 @@
 #include "WPILib.h"
+// WPILib/WPILib.h
 
 /**
  * This is a demo program showing the use of the RobotBase class.
@@ -52,10 +53,11 @@ public:
 		myRobot.SetSafetyEnabled(true);
 		digEncoder.Start();
 		const double ppsTOrpm = 60.0/250.0;	// Changed from 250 to 360- 1/13/14. //This converts from Pos per Second to Rotations per Minute (See back of encoder to replace 250 if you need it)
+		const double posTOin = 12*3.14159/250; //Converts from postions to inchs to calculate distance.
 		//ultrasonic1.SetAutomaticMode(true);
 		//ultra.SetAverageBits(12);
 		const float VoltsToIn = 40.0; // Convert from volts to cm by multiplication (volts from ultrasonic)
-		
+		con
 		while (IsOperatorControl())
 		{
 			if (stick.GetRawButton(4)) {
@@ -65,6 +67,7 @@ public:
 			} else {
 				myRobot.MecanumDrive_Cartesian(stick.GetX(), stick.GetY(), 0);
 			}
+			SmartDashboard::PutNumber("Digital Encoder RPM", digEncoder.GetDistance()*posTOin);
 			SmartDashboard::PutNumber("Digital Encoder RPM", digEncoder.GetRate()*ppsTOrpm);
 			//SmartDashboard::PutNumber("Digital Encoder Raw", digEncoder.GetRaw());
 			//SmartDashboard::PutNumber("Ultrasonic Distance", ultrasonic1.GetRangeInches());
