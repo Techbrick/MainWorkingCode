@@ -57,7 +57,6 @@ public:
 		//ultrasonic1.SetAutomaticMode(true);
 		//ultra.SetAverageBits(12);
 		const float VoltsToIn = 40.0; // Convert from volts to cm by multiplication (volts from ultrasonic)
-		con
 		while (IsOperatorControl())
 		{
 			if (stick.GetRawButton(4)) {
