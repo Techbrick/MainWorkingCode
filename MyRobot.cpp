@@ -79,10 +79,12 @@ public:
 	{
 		myRobot.SetSafetyEnabled(true);
 		digEncoder.Start();
-		const double ppsTOrpm = 60.0/250.0;	// Changed from 250 to 360- 1/13/14. //This converts from Pos per Second to Rotations per Minute (See back of encoder to replace 250 if you need it)
 		//ultrasonic1.SetAutomaticMode(true);
 		//ultra.SetAverageBits(12);
-		const float VoltsPerInch = 1.0/40.0; // Convert from volts to cm by multiplication (volts from ultrasonic)
+		 const double ppsTOrpm = 60.0/250.0;        //Convert from Pos per Second to Rotations per Minute by multiplication
+                                                        // (See the second number on the back of the encoder to replace 250 for different encoders)
+                const float VoltsToIn = 41.0;         // Convert from volts to cm by multiplication (volts from ultrasonic).
+                                                // This value worked for distances between 1' and 10'.
 		
 		while (IsOperatorControl())
 		{
