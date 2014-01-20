@@ -11,7 +11,6 @@ class RobotDemo : public SimpleRobot
 	RobotDrive myRobot; // robot drive system
 	Joystick stick; // only joystick
 	Encoder digEncoder;
-	//Ultrasonic ultrasonic1;
 	AnalogChannel ultra;
 	Servo servo;
 
@@ -20,7 +19,6 @@ public:
 		myRobot(8, 1, 9, 2),
 		stick(1),
 		digEncoder(13, 14),
-		//ultrasonic1(11, 11) //Init in same order declared above
 		ultra(1, 1),
 		servo(5)
 	{											
@@ -33,12 +31,12 @@ public:
 	}
 
 	/**
-	 * Drive left & right motors for 2 seconds then stop
+	 * Drive forward for 10 feet and briefly stop if the ultrasonic sees something
 	 */
 	void Autonomous(void)
 	{
 		myRobot.SetSafetyEnabled(false);
-		bool go = true;s
+		bool go = true;
 		digEncoder.Reset();
 		digEncoder.Start();
 		while {digEncoder.GetDistance()*-12*3.14159/500.0 < 10*12.0 && go == true)
@@ -101,7 +99,7 @@ public:
 			SmartDashboard::PutNumber("Digital Encoder RPM", digEncoder.GetRate()*ppsTOrpm);
 			//SmartDashboard::PutNumber("Digital Encoder Raw", digEncoder.GetRaw());
 			//SmartDashboard::PutNumber("Ultrasonic Distance", ultrasonic1.GetRangeInches());
-			SmartDashboard::PutNumber("Ultrasonic Distance inch", (double) ultra.GetAverageVoltage()/VoltsPerInch);
+			SmartDashboard::PutNumber("Ultrasonic Distance inch", (double) ultra.GetAverageVoltage()*VoltsPerInch);
 			/*if (stick.GetRawButton(1)) {
 				servo.SetAngle(0.0);
 				SmartDashboard::PutNumber("Servo", (double) servo.GetAngle());
