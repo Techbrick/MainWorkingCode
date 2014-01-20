@@ -38,13 +38,34 @@ public:
 	void Autonomous(void)
 	{
 		myRobot.SetSafetyEnabled(false);
-		
+		bool go = true;s
 		digEncoder.Reset();
 		digEncoder.Start();
-		while (digEncoder.GetDistance()*-12*3.14159/500.0 < 10*12.0) {
+		while {digEncoder.GetDistance()*-12*3.14159/500.0 < 10*12.0 && go == true)
+		{
+			if (ultra.GetVoltage()/40.0 < 24)
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					wait(1.0);
+					if (ultra.GetVoltage()/40.0 < 24)
+					{
+						go = true;
+						break;
+					}
+					else
+					{
+						go = false;
+					}
+				}
+			}
 			myRobot.MecanumDrive_Cartesian(0, -.2, 0);
 			SmartDashboard::PutNumber("Encoder Post Conversion", digEncoder.GetDistance()*-12*3.14159/250.0);
 		}
+		/*while (digEncoder.GetDistance()*-12*3.14159/500.0 < 10*12.0) {
+			myRobot.MecanumDrive_Cartesian(0, -.2, 0);
+			SmartDashboard::PutNumber("Encoder Post Conversion", digEncoder.GetDistance()*-12*3.14159/250.0);
+		}*/
 		digEncoder.Stop();
 		
 		myRobot.MecanumDrive_Cartesian(0, 0, 0);
