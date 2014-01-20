@@ -25,12 +25,18 @@ public:
 	 */
 	void OperatorControl(void)
 	{
+		float newAngle;
+
 		servo.SetAngle(0.0);
 		SmartDashboard::PutNumber("Servo angle", (double) servo.GetAngle());
 
 		while (IsOperatorControl())
 		{
-			servo.SetAngle(SmartDashboard::GetNumber("Servo angle"));				// Set angle to angle inputted on SmartDashboard
+			newAngle = SmartDashboard::GetNumber("Servo angle");
+
+			if(newAngle <= servo.GetMaxAngle() && newAngle >= 0.0)
+				servo.SetAngle(newAngle);			// Set angle to angle inputted on SmartDashboard
+
 			SmartDashboard::PutNumber("Servo angle", (double) servo.GetAngle());	// Update the servo angle on SmartDashboard
 
 			Wait(0.1);		// Pause for 0.1 seconds
