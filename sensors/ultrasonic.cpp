@@ -1,6 +1,6 @@
 #include "WPILib.h"
 
-// This is working code for the digital encoder. Change the pin numbers to match your robot's configuration.
+// This is working code for the digital encoder. Change the pin numbers to match your robot's config.
 
 class RobotDemo : public SimpleRobot
 {
